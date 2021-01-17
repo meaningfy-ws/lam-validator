@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  rdf-validator-api:
+    container_name: rdf-validator-api
+    build:
+      context: ..
+      dockerfile: ./docker/api/Dockerfile
+    ports:
+      - ${RDF_VALIDATOR_API_PORT}:${RDF_VALIDATOR_API_PORT}
+    env_file: .env
+    restart: always
+    networks:
+      - mydefault
+
+  rdf-validator-ui:
+    container_name: rdf-validator-ui
+    image: meaningfy/rdf-validator-ui:latest
+    ports:
+      - ${RDF_VALIDATOR_UI_PORT}:${RDF_VALIDATOR_UI_PORT}
+    env_file: .env
+    restart: always
+    depends_on:
+      - "rdf-validator-api"
+    networks:
+      - mydefault
+
+
+networks:
+  mydefault:
+    name: globalnet
