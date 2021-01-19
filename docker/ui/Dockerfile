@@ -1,0 +1,4 @@
+FROM meaningfy/rdf-validator-ui:latest
+
+ENV RDF_VALIDATOR_API_PORT=10001
+ENV RDF_VALIDATOR_UI_PORT=10002

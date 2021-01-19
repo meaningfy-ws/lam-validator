@@ -15,7 +15,9 @@ services:
 
   rdf-validator-ui:
     container_name: rdf-validator-ui
-    image: meaningfy/rdf-validator-ui:latest
+    build:
+      context: ..
+      dockerfile: ./docker/ui/Dockerfile
     ports:
       - ${RDF_VALIDATOR_UI_PORT}:${RDF_VALIDATOR_UI_PORT}
     env_file: .env
