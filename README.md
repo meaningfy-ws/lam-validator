@@ -98,6 +98,16 @@ make start-services
  ```
 in the shell window to start the services.
 
+## Makefile targets
+
+**build-services**
+- Uses docker-compose to build all the services defined in the docker/docker-compose.yml file.
+
+**start-services**
+- Uses docker-compose to start the services defined in the docker/docker-compose.yml file.
+
+**stop-services**
+- Uses docker-compose to stop the services defined in the docker/docker-compose.yml file.
 
 # Contributing
 You are more than welcome to help expand and mature this project. 
