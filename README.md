@@ -2,12 +2,11 @@
 The LAM validator is used to perform validation of RDF content after it is exported from VocBench 3 platform. The validation procedure is based on SHACL data shape checking and is done using LAM-SKOS-AP application profile. 
 
 
-# Repository Structure
-* /docker -the docker files representing specification and configurations for running the services on a target server
-* README.md - this file
-
 # Services and their respective configurations
 Please note that the configured values can be changed by modifying the [`/docker/.env`](./docker/.env) file.
+
+
+### [this file](curl-examples.md) contains a list of examples on how to use the updated api
 
 
 ### RDF Validator API

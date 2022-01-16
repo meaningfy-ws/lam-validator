@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% import "macros.html" as mc %}
+
+{% block content %}
+    {% set namespaces = namespace_inventory({}) %}
+
+    <h1>Validation issues</h1>
+    {% include "sections/simple_view.html" with context %}
+
+    <h1>Prefixes</h1>
+    <section class="ui basic segment">
+        {{ mc.render_namespaces(namespaces.namespaces_as_dict()) }}
+    </section>
+{% endblock %}

@@ -6,10 +6,14 @@ services:
     build:
       context: ..
       dockerfile: ./docker/api/Dockerfile
+    volumes:
+      - ..:/usr/src/app
     ports:
       - ${RDF_VALIDATOR_API_PORT}:${RDF_VALIDATOR_API_PORT}
     env_file: .env
     restart: always
+    depends_on:
+      - rdf-validator-celery-worker
     networks:
       - mydefault
 
@@ -20,13 +24,47 @@ services:
       dockerfile: ./docker/ui/Dockerfile
     ports:
       - ${RDF_VALIDATOR_UI_PORT}:${RDF_VALIDATOR_UI_PORT}
+    volumes:
+      - ..:/usr/src/app
     env_file: .env
     restart: always
     depends_on:
-      - "rdf-validator-api"
+      - rdf-validator-api
     networks:
       - mydefault
 
+  rdf-validator-celery-worker:
+    container_name: rdf-validator-celery-worker
+    build:
+      context: ..
+      dockerfile: ./docker/api/Dockerfile
+    command: celery -A validator.adapters.celery.celery_worker worker --loglevel ${RDF_VALIDATOR_LOG_LEVEL} --logfile ${RDF_VALIDATOR_CELERY_LOGS}
+    volumes:
+      - ..:/usr/src/app
+    env_file: .env
+    networks:
+      - mydefault
+    depends_on:
+      - rdf-validator-redis
+
+  rdf-validator-redis:
+    image: redis:6-alpine
+    ports:
+      - ${RDF_VALIDATOR_REDIS_PORT}:${RDF_VALIDATOR_REDIS_PORT}
+    networks:
+      - mydefault
+
+  validator-dashboard:
+    build:
+      context: ..
+      dockerfile: ./docker/api/Dockerfile
+    command: celery -A validator.adapters.celery.celery_worker --broker=${RDF_VALIDATOR_REDIS_LOCATION}:${RDF_VALIDATOR_REDIS_PORT} flower --port=${RDF_VALIDATOR_FLOWER_PORT}
+    ports:
+      - ${RDF_VALIDATOR_FLOWER_PORT}:${RDF_VALIDATOR_FLOWER_PORT}
+    depends_on:
+      - rdf-validator-celery-worker
+    networks:
+      - mydefault
 
 networks:
   mydefault:

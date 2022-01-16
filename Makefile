@@ -8,12 +8,12 @@ BUILD_PRINT = \e[1;34mSTEP: \e[0m
 
 build-services:
 	@ echo -e '$(BUILD_PRINT)Building the containers'
-	@ docker-compose --file docker/docker-compose.yml --env-file docker/.env build
+	@ docker-compose --file docker/docker-compose.yml --env-file .env build
 
 start-services:
-	@ echo -e '$(BUILD_PRINT)(dev) Starting the containers'
-	@ docker-compose --file docker/docker-compose.yml --env-file docker/.env up -d
+	@ echo -e '$(BUILD_PRINT) Starting the containers'
+	@ docker-compose --file docker/docker-compose.yml --env-file .env up -d
 
 stop-services:
-	@ echo -e '$(BUILD_PRINT)(dev) Stopping the containers'
-	@ docker-compose --file docker/docker-compose.yml --env-file docker/.env stop
+	@ echo -e '$(BUILD_PRINT) Stopping the containers'
+	@ docker-compose --file docker/docker-compose.yml --env-file .env stop

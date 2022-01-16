@@ -1,0 +1,13 @@
+{% import "macros.html" as mc %}
+
+{% set content, error = from_rdf_file(conf.report_data_file).with_query_from_file(conf.query_file).fetch_tabular() %}
+{% if not content.empty %}
+    {% call mc.render_fetch_results(content, error) %}
+        {% set compress_uris = simplify_uri_columns_in_tabular(data_frame=content,namespace_inventory=namespaces,error_fail=False) %}
+        <section class="ui basic segment">
+
+            {{ mc.pandas_table(content, "Validation issues") }}
+        </section>
+    {% endcall %}
+{% endif %}
+
