@@ -3,7 +3,7 @@ The LAM validator is used to perform validation of RDF content after it is expor
 
 
 # Services and their respective configurations
-Please note that the configured values can be changed by modifying the [`/docker/.env`](./docker/.env) file.
+Please note that the default values can be found in [`/docker/.env.example`](./docker/.env.example). Create a [`/docker/.env`](./docker/.env) file and set the values according to your desired configuration.
 
 
 ### [this file](curl-examples.md) contains a list of examples on how to use the updated api
