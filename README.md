@@ -2,12 +2,11 @@
 The LAM validator is used to perform validation of RDF content after it is exported from VocBench 3 platform. The validation procedure is based on SHACL data shape checking and is done using LAM-SKOS-AP application profile. 
 
 
-# Repository Structure
-* /docker -the docker files representing specification and configurations for running the services on a target server
-* README.md - this file
-
 # Services and their respective configurations
-Please note that the configured values can be changed by modifying the [`/docker/.env`](./docker/.env) file.
+Please note that the default values can be found in [`/docker/.env.example`](./docker/.env.example). Create a [`/docker/.env`](./docker/.env) file and set the values according to your desired configuration.
+
+
+### [this file](curl-examples.md) contains a list of examples on how to use the updated api
 
 
 ### RDF Validator API
@@ -44,7 +43,7 @@ The following ports must be available on the host machine, as they will be bound
 |10002| RDF Validator user interface|
 
 
-# Deployment
+# Installation
 
 ### Install the Docker engine
 
@@ -67,29 +66,13 @@ git clone https://github.com/meaningfy-ws/lam-validator.git
 
 In the same shell, navigate to the repository "lam-validator" (where Git cloned the repository).
 
-The default configuration uses the SHACL shapes defined in [`lam-skos-api.ttl`](resources/lam-skos-ap.ttl) and does not allow additional SHACL shapes to be used for validation.
+The default configuration uses the SHACL shapes defined in [`lam-skos-api.ttl`](resources/aps/main/lam-skos-ap.ttl).
 ![default-validator-configuration](docs/images/default-validator-configuration.png)
-
-To allow additional SHACL shapes  `RDF_VALIDATOR_ALLOWS_EXTRA_SHAPES` 
-from [`.env`](docker/.env)
-```
-RDF_VALIDATOR_ALLOWS_EXTRA_SHAPES=True
-```
-
-After setting the extra shapes, the UI will adjust accordingly and you'll be able to upload additional shape files.
-
-![allow-additional-shacl-shapes](docs/images/allow-shacl-shapes.png)
 
 > Note! 
 > For this update to take place restart the containers.
 
-To add additional default SHACL shape files, put them in the [`resources`](resources) folder.
-
-> Note! 
-> For this update to take place you'll have to rebuild the containers.
-```shell script
-make build-services
- ```
+To add additional default SHACL shape files you could either create a new Application Profile or update the currently provided one (`main`), found in [`resources/aps/`](resources/aps/) folder.
 
 ## Run containers
 After you have configured the project according to your needs run:

@@ -1,0 +1,15 @@
+requests==2.26.0  # https://docs.python-requests.org/en/latest/
+connexion[swagger-ui]==2.7.0   # https://github.com/zalando/connexion
+Flask==1.1.4  # https://flask.palletsprojects.com/en/1.1.x/
+flask-bootstrap==3.3.7.1  # https://pythonhosted.org/Flask-Bootstrap/
+Flask-Wtf==1.0.0  # https://flask-wtf.readthedocs.io/en/1.0.x/
+
+rdflib==5.0.0  # https://github.com/RDFLib/rdflib
+pyparsing==2.*  # https://github.com/pyparsing/pyparsing
+python-dotenv==0.19.2  # https://github.com/theskumar/python-dotenv
+eds4jinja2==0.1.34  # https://github.com/meaningfy-ws/eds4jinja2
+shortuuid==1.0.1  # https://pypi.org/project/shortuuid/
+
+celery==5.1.2  # https://docs.celeryproject.org/en/v5.1.2/
+redis==3.5.3  # https://redis-py.readthedocs.io/en/3.5.3/
+flower==1.0.0  # https://flower.readthedocs.io/en/1.0/
